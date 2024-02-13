@@ -1,8 +1,8 @@
 package com.dttasktwo.doubletapptasktwo
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import com.dttasktwo.doubletapptasktwo.databinding.ActivityFirstBinding
 import kotlin.properties.Delegates.notNull
 
@@ -22,9 +22,13 @@ class FirstActivity : AppCompatActivity() {
 
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        increment()
+    }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        increment()
         outState.putInt(COUNTER_KEY, counter)
     }
 
