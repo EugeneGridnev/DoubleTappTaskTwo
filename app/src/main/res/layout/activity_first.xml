@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:fontFamily="casual"
         android:text="0"
         app:layout_constraintVertical_chainStyle="packed"
