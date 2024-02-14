@@ -1,7 +1,5 @@
 package com.dttasktwo.doubletapptasktwo
 
-import android.app.Activity
-import android.app.Instrumentation.ActivityResult
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
