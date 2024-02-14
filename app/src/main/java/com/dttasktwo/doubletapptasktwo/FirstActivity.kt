@@ -4,8 +4,8 @@ import android.content.Intent
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.dttasktwo.doubletapptasktwo.databinding.ActivityFirstBinding
-import java.io.IOException
 import kotlin.properties.Delegates.notNull
 
 class FirstActivity : AppCompatActivity() {
@@ -15,45 +15,45 @@ class FirstActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "Активити 1: onCreate")
         binding = ActivityFirstBinding.inflate(layoutInflater).also { setContentView(it.root) }
 
         binding.firstButton.setOnClickListener { onButtonPressed() }
 
         counter = savedInstanceState?.getInt(COUNTER_KEY) ?: 0
         binding.tvFirstNumber.text = counter.toString()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onCreate")
-
     }
 
     override fun onStart() {
         super.onStart()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onStart")
+        Log.i(TAG, "Активити 1: onStart")
     }
 
     override fun onResume() {
         super.onResume()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onResume")
+        Log.i(TAG, "Активити 1: onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onPause")
+        Log.i(TAG, "Активити 1: onPause")
     }
 
     override fun onStop() {
         super.onStop()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onStop")
+        Log.i(TAG, "Активити 1: onStop")
     }
 
     override fun onRestart() {
         super.onRestart()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onRestart")
+        Log.i(TAG, "Активити 1: onRestart")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION + "onDestroy")
+        Log.i(TAG, "Активити 1: onDestroy")
     }
+
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
         increment()
@@ -61,9 +61,8 @@ class FirstActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
+        Log.i(TAG, "Активити 1: onSaveInstanceState counter = $counter")
         outState.putInt(COUNTER_KEY, counter)
-        saveActivityStateToFile(FILE_NAME, ACTION_DESCRIPTION +
-                "onSaveInstanceState, counter равен: $counter")
     }
 
     private fun onButtonPressed() {
@@ -77,20 +76,8 @@ class FirstActivity : AppCompatActivity() {
         binding.tvFirstNumber.text = counter.toString()
     }
 
-    private fun saveActivityStateToFile(fileName: String, actionDescription: String) {
-        return try {
-            openFileOutput(fileName, MODE_APPEND).use { stream->
-                stream.write(actionDescription.toByteArray())
-            }
-        } catch (exp: IOException) {
-            exp.printStackTrace()
-        }
-    }
-
     companion object {
         @JvmStatic val COUNTER_KEY = "COUNTER"
-        private const val FILE_NAME = "activity_actions.txt"
-        private const val ACTION_DESCRIPTION = "\nАКТИВИТИ 1: "
-
+        private const val TAG = "FirstLifecycleActivity"
     }
 }
